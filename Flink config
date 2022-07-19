@@ -1,0 +1,5 @@
+Flink 常用配置
+-- 开启火焰图
+-Drest.flamegraph.enabled=true
+-- 使用状态跳过，在使用ck重启时使用
+-Dexecution.savepoint.ignore-unclaimed-state=true
