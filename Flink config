@@ -3,3 +3,15 @@ Flink 常用配置
 -Drest.flamegraph.enabled=true
 -- 使用状态跳过，在使用ck重启时使用
 -Dexecution.savepoint.ignore-unclaimed-state=true
+-- 设置ttl
+set table.exec.state.ttl = 600000;
+
+使用记录：
+1、cdc流是不支持interval join 和 windows的
+2、upsert kafka在数据写入的过程中，会存在状态的存在，需要设置ttl进行状态的删除
+3、interval join必须要指定watermark，否则会变更为普通join
+4、在interval join的作业里加普通join是，普通join不能使用watermark，且需要设置ttl
+5、interval join的数据产出会有延迟，延迟时间为interval的区间
+
+常用场景的处理方式：
+1、a流可能早或晚于b流，且早可能为1天，晚1min内，此时可以用interval join 加普通join配合的方式解决
