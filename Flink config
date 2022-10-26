@@ -27,3 +27,7 @@ et as cast(col as TIMESTAMP(3))
 16666 66666
 et  as TO_TIMESTAMP(FROM_UNIXTIME(cast(json_value(json_str,'$.after.updated_at') as bigint)/1000))
 
+时间转dt 
+TO_TIMESTAMP_LTZ（1666666666 - 1666666666%（24*60*60），0） --> timestamp 
+
+FROM_UNIXTIME（1666666666 - 1666666666%（24*60*60） --> string 
