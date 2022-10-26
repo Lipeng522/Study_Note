@@ -15,3 +15,15 @@ set table.exec.state.ttl = 600000;
 
 常用场景的处理方式：
 1、a流可能早或晚于b流，且早可能为1天，晚1min内，此时可以用interval join 加普通join配合的方式解决
+
+
+event time 设置
+2022-10-26T10:00:00Z
+et as cast(REGEXP_REPLACE(REGEXP_REPLACE(cast(json_value(json_str,'$.after.gmt_modified') as string),'T',' '),'Z','.000') as TIMESTAMP(3)),
+
+2022-10-26 10:00:10
+et as cast(col as TIMESTAMP(3))
+
+16666 66666
+et  as TO_TIMESTAMP(FROM_UNIXTIME(cast(json_value(json_str,'$.after.updated_at') as bigint)/1000))
+
