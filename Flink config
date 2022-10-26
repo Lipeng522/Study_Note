@@ -34,3 +34,11 @@ FROM_UNIXTIME（1666666666 - 1666666666%（24*60*60） --> string
 
 CAST(CONCAT(SUBSTR(CAST(FROM_UNIXTIME(cast(trade_time as bigint)/1000) as STRING),1,10),' 00:00:00') as TIMESTAMP) as dt 
 TO_TIMESTAMP_LTZ((cast(trade_time as bigint) -  cast(trade_time as bigint)%(3600*24*1000))/1000 ,0) as dt 
+
+
+写doris 异常，too many filters 
+1、主键有null 时间转换失败
+2、字符长度不够，创建doris表时要指定doris的varchar长度，如varchar(256)
+
+FROM_UNIXTIME（1666666666 - 1666666666%（24*60*60） --> string shi
+FROM_UNIXTIME（1666666666 - 1666666666%（24*60*60） --> string 
