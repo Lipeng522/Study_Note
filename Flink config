@@ -31,3 +31,6 @@ et  as TO_TIMESTAMP(FROM_UNIXTIME(cast(json_value(json_str,'$.after.updated_at')
 TO_TIMESTAMP_LTZ（1666666666 - 1666666666%（24*60*60），0） --> timestamp 
 
 FROM_UNIXTIME（1666666666 - 1666666666%（24*60*60） --> string 
+
+CAST(CONCAT(SUBSTR(CAST(FROM_UNIXTIME(cast(trade_time as bigint)/1000) as STRING),1,10),' 00:00:00') as TIMESTAMP) as dt 
+TO_TIMESTAMP_LTZ((cast(trade_time as bigint) -  cast(trade_time as bigint)%(3600*24*1000))/1000 ,0) as dt 
